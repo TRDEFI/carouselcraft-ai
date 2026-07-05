@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CarouselCraft AI — Instagram Carousel Generator</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🎠</text></svg>">
+<title>CarouselCraft AI â€” Instagram Carousel Generator</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>ğŸ </text></svg>">
 <style>
 :root {
   --bg: #0a0a0f;
@@ -135,8 +135,8 @@ textarea { resize: vertical; min-height: 80px; font-family: inherit; }
 <body>
 
 <div class="header">
-  <h1>🎠 CarouselCraft AI</h1>
-  <p>AI-powered Instagram Carousel Generator — <a href="https://pollinations.ai" target="_blank">Built with Pollinations.ai</a></p>
+  <h1>ğŸ  CarouselCraft AI</h1>
+  <p>AI-powered Instagram Carousel Generator â€” <a href="https://pollinations.ai" target="_blank">Built with Pollinations.ai</a></p>
 </div>
 
 <div class="container">
@@ -147,7 +147,7 @@ textarea { resize: vertical; min-height: 80px; font-family: inherit; }
     <div class="tagline">AI will create 3 cohesive slide prompts + images + caption</div>
     <div class="btn-group">
       <button class="btn btn-primary" id="generateBtn" onclick="generate()">
-        <span id="btnText">🚀 Generate Carousel</span>
+        <span id="btnText">ğŸš€ Generate Carousel</span>
       </button>
     </div>
     <div id="status" class="status"></div>
@@ -155,29 +155,30 @@ textarea { resize: vertical; min-height: 80px; font-family: inherit; }
 
   <div id="results" style="display:none">
     <div class="card">
-      <h2>📋 Topic</h2>
+      <h2>ğŸ“‹ Topic</h2>
       <div id="topicDisplay" style="font-size:18px;font-weight:600;color:var(--accent2)"></div>
     </div>
 
     <div class="card">
-      <h2>🖼️ Generated Slides</h2>
+      <h2>ğŸ–¼ï¸ Generated Slides</h2>
       <div id="gallery" class="gallery"></div>
     </div>
 
     <div class="card">
-      <h2>📝 Caption</h2>
+      <h2>ğŸ“ Caption</h2>
       <div id="captionDisplay" style="white-space:pre-wrap;line-height:1.6;font-size:14px"></div>
     </div>
   </div>
 
   <div class="footer">
-    <p><a href="https://pollinations.ai" target="_blank">🌱 pollinations.ai</a> — Open-source generative AI for everyone</p>
+    <p><a href="https://pollinations.ai" target="_blank">ğŸŒ± pollinations.ai</a> â€” Open-source generative AI for everyone</p>
     <p style="margin-top:4px">CarouselCraft uses Pollinations API for text &amp; image generation</p>
   </div>
 </div>
 
 <script>
 const POLLINATIONS_BASE = 'https://gen.pollinations.ai';
+const APP_KEY = 'pk_0IyiIiK4iiWkuRVE';
 
 async function generate() {
   const btn = document.getElementById('generateBtn');
@@ -199,7 +200,10 @@ async function generate() {
   try {
     const llmRes = await fetch(`${POLLINATIONS_BASE}/v1/chat/completions`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${APP_KEY}`
+      },
       body: JSON.stringify({
         model: 'openai',
         messages: [
@@ -238,7 +242,10 @@ async function generate() {
       const url = `${POLLINATIONS_BASE}/v1/images/generations`;
       const imgRes = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${APP_KEY}`
+        },
         body: JSON.stringify({ model: 'flux', prompt, width: 1024, height: 1024, n: 1 })
       });
       if (!imgRes.ok) throw new Error(`Image ${i+1} failed`);
@@ -257,18 +264,18 @@ async function generate() {
       if (el && r.data) {
         el.outerHTML = `<img src="${r.data}" alt="Slide ${r.idx+1}" loading="lazy">`;
       } else if (el) {
-        el.innerHTML = '<div style="padding:40px;text-align:center;color:#ff5050;font-size:13px">⚠️ Failed to load</div>';
+        el.innerHTML = '<div style="padding:40px;text-align:center;color:#ff5050;font-size:13px">âš ï¸ Failed to load</div>';
       }
     });
 
-    showStatus('✅ Carousel generated successfully!', 'success');
+    showStatus('âœ… Carousel generated successfully!', 'success');
 
   } catch (err) {
     showStatus(`Error: ${err.message}`, 'error');
     console.error(err);
   } finally {
     btn.disabled = false;
-    btnText.innerHTML = '🚀 Generate Carousel';
+    btnText.innerHTML = 'ğŸš€ Generate Carousel';
   }
 }
 
